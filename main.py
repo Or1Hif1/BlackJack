@@ -60,6 +60,7 @@ is_enter = False
 gap = 600
 f = open("names", "r")
 card_names = str(f.read())
+f.close()
 
 cards = card_names.split("\n")
 card = pygame.image.load("Cards/clear.png")
