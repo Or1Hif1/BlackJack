@@ -97,7 +97,7 @@ def play():
 
         if not fix:
             if is_stand and dealer_stand:
-                if dealer_count > total_hand:
+                if total_hand < dealer_count <= 21:
                     print("dealer win")
                     d_win = True
                 elif dealer_count == total_hand:
@@ -121,7 +121,7 @@ def play():
                 print("dealer win")
             if total_hand == 21:
                 is_stand = True
-            if is_stand and dealer_count > total_hand:
+            if is_stand and total_hand < dealer_count <= 21:
                 d_win = True
                 print("dealer wins")
 
@@ -158,15 +158,32 @@ def play():
                 if not dealer_stand and not d_win:
                     if dealer_count < 17:
                         if len(dealer_hands) <= 6 and is_enter and not dealer_stand:
-                            #   print("randoming card")
-                            name = cards[random.randint(0, len(cards) - 1)]
-                            cards.remove(name)
-                            dealer_count += to_num(name)
-                            print("dealer: "+str(dealer_count))
-                            dealer_hands.append(pygame.image.load("Cards/" + name))
-                            dealer_turn = False
-                    else:
+                            if dealer_count < total_hand and is_stand:
+                                name = cards[random.randint(0, len(cards) - 1)]
+                                cards.remove(name)
+                                dealer_count += to_num(name)
+                                print("dealer: " + str(dealer_count))
+                                dealer_hands.append(pygame.image.load("Cards/" + name))
+                                dealer_turn = False
+                            elif not is_stand:
+                                #   print("randoming card")
+                                name = cards[random.randint(0, len(cards) - 1)]
+                                cards.remove(name)
+                                dealer_count += to_num(name)
+                                print("dealer: "+str(dealer_count))
+                                dealer_hands.append(pygame.image.load("Cards/" + name))
+                                dealer_turn = False
+                    elif total_hand < dealer_count:
                         print("dealer stand")
+                        dealer_stand = True
+                    elif is_stand and dealer_count < total_hand:
+                        name = cards[random.randint(0, len(cards) - 1)]
+                        cards.remove(name)
+                        dealer_count += to_num(name)
+                        print("dealer: " + str(dealer_count))
+                        dealer_hands.append(pygame.image.load("Cards/" + name))
+                        dealer_turn = False
+                    elif is_stand and dealer_count == total_hand:
                         dealer_stand = True
             k = 0
             j = 0
@@ -239,9 +256,12 @@ def play():
 
 def main():
     while True:
-        rematch2 = play()
-        if not rematch2:
-            break
+        try:
+            rematch2 = play()
+            if not rematch2:
+                break
+        except ValueError:
+            continue
 
 
 main()
