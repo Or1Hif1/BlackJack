@@ -1,6 +1,6 @@
-import time
-
-import pygame, sys, random
+import pygame
+import random
+import sys
 from pygame.locals import *
 
 
@@ -25,11 +25,14 @@ def to_num(card_name):
 def bust():
     screen.blit(bust_img, (WINDOW_WIDTH / 2 - bust_img.get_width() / 2, WINDOW_HEIGHT / 2 - bust_img.get_height() / 2))
 
+
 def win():
     screen.blit(win_img, (WINDOW_WIDTH / 2 - win_img.get_width() / 2, WINDOW_HEIGHT / 2 - win_img.get_height() / 2))
 
+
 def draw():
     screen.blit(draw_img, (WINDOW_WIDTH / 2 - draw_img.get_width() / 2, WINDOW_HEIGHT / 2 - draw_img.get_height() / 2))
+
 
 pygame.init()
 # Colours
