@@ -173,7 +173,7 @@ def play():
             for x in hands:
                 k += 31
                 x = pygame.transform.scale(x, (147, 207))
-                screen.blit(x, (WINDOW_WIDTH/2 - 302*0.65 + k, WINDOW_HEIGHT/2 - card.get_height() / 2))
+                screen.blit(x, (WINDOW_WIDTH/2 - 302*0.65 + k, WINDOW_HEIGHT/2 - card.get_height() / 2+225/16))
             for y in dealer_hands:
                 j += 31
                 y = pygame.transform.scale(y, (147, 207))
